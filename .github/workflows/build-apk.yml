@@ -1,4 +1,4 @@
-Names : Convert PWA to Release AAB (Wamda Pro)
+name: Convert PWA to Release AAB (Wamdapro)
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
 
 env:
-  APP_NAME: "Wamda Pro"
+  APP_NAME: "Wamdapro"
   PACKAGE_NAME: "com.wamdapro.app"
-  ADMOB_APP_ID: "ca-app-pub-7963124644580434~7235146621"
-  APP_VERSION: "1.0.2"
-  VERSION_CODE: "2"  # <--- EASILY CHANGE YOUR VERSION CODE HERE
+  ADMOB_APP_ID: "ca-app-pub-7963124644580434~7235146621" 
+  APP_VERSION: "1.0.3"
+  VERSION_CODE: "3"
 
 jobs:
   build:
@@ -152,6 +152,7 @@ jobs:
           if [ -f node_modules/capacitor-admob-nextgen/scripts/admob-native.js ]; then node node_modules/capacitor-admob-nextgen/scripts/admob-native.js; fi
           
           sed -i '/<application/i \    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />' android/app/src/main/AndroidManifest.xml
+          sed -i '/<application/i \    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />' android/app/src/main/AndroidManifest.xml
 
       - name: Inject Custom Notification Layout and Native Code
         run: |
@@ -338,7 +339,8 @@ jobs:
               buildTypes {
                   release {
                       signingConfig signingConfigs.release
-                      minifyEnabled false
+                      minifyEnabled true
+                      shrinkResources true
                       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
                   }
               }
@@ -356,10 +358,10 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
       - name: Move & Rename AAB Output
-        run: mv android/app/build/outputs/bundle/release/app-release.aab wamda-pro.aab
+        run: mv android/app/build/outputs/bundle/release/app-release.aab wamdapro.aab
 
       - name: Upload Signed Release AAB Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wamda-pro-aab
-          path: wamda-pro.aab
+          name: wamdapro-aab
+          path: wamdapro.aab
