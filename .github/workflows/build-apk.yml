@@ -10,8 +10,8 @@ env:
   APP_NAME: "Wamdapro"
   PACKAGE_NAME: "com.wamdapro.app"
   ADMOB_APP_ID: "ca-app-pub-7963124644580434~7235146621" 
-  APP_VERSION: "1.0.3"
-  VERSION_CODE: "3"
+  APP_VERSION: "1.0.4"
+  VERSION_CODE: "4"
 
 jobs:
   build:
