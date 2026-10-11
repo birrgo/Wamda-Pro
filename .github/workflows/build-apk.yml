@@ -1,4 +1,4 @@
-name: Convert PWA to Release AAB (Wamda Pro)
+Name: Convert PWA to Release AAB (Wamda Pro)
 
 on:
   push:
@@ -9,8 +9,9 @@ on:
 env:
   APP_NAME: "Wamda Pro"
   PACKAGE_NAME: "com.wamdapro.app"
-  ADMOB_APP_ID: "ca-app-pub-1118823918279022~2589834382"
-  APP_VERSION: "1.0.0"
+  ADMOB_APP_ID: "ca-app-pub-7963124644580434~7235146621"
+  APP_VERSION: "1.0.2"
+  VERSION_CODE: "2"  # <--- EASILY CHANGE YOUR VERSION CODE HERE
 
 jobs:
   build:
@@ -308,7 +309,7 @@ jobs:
 
       - name: Set Version Code and Name
         run: |
-          sed -i 's/versionCode [0-9]*/versionCode ${{ github.run_number }}/' android/app/build.gradle
+          sed -i 's/versionCode [0-9]*/versionCode ${{ env.VERSION_CODE }}/' android/app/build.gradle
           sed -i 's/versionName "[^"]*"/versionName "${{ env.APP_VERSION }}"/' android/app/build.gradle
 
       - name: Add Google Services JSON
