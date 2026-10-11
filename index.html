@@ -655,7 +655,7 @@
                 if (isNativeApp() && AdPlugin) {
                     try {
                         if (typeof AdPlugin.requestConsentInfo === "function") await AdPlugin.requestConsentInfo({ showFormIfRequired: true });
-                        if (typeof AdPlugin.initialize === "function") await AdPlugin.initialize({ isTesting: true });
+                        if (typeof AdPlugin.initialize === "function") await AdPlugin.initialize({ isTesting: false });
                         
                         if (AdPlugin.addListener && !window.adEventsBound) {
                             window.adEventsBound = true;
